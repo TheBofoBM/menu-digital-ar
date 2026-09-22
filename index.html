@@ -4,21 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Digital AR</title>
-    <!-- Estilos -->
     <link rel="stylesheet" href="css/temas.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Librería para Realidad Aumentada -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Restaurante Piloto</h1>
-    </header>
+    <!-- Pantalla principal del Menú -->
+    <div id="pantalla-menu">
+        <header>
+            <h1 data-traducir="titulo">Restaurante Piloto</h1>
+            <button id="btn-traducir" class="btn-icono" title="Cambiar Idioma">🌐</button>
+        </header>
 
-    <main>
-        <h2>Nuestro Menú</h2>
-        <div id="contenedor-menu" class="grid-menu"></div>
-    </main>
+        <!-- Navegación por categorías para evitar scroll infinito -->
+        <nav class="categorias-nav">
+            <button class="btn-categoria activo" data-categoria="todos">Todos</button>
+            <button class="btn-categoria" data-categoria="entradas">Entradas</button>
+            <button class="btn-categoria" data-categoria="fuertes">Platos Fuertes</button>
+        </nav>
+
+        <main>
+            <div id="contenedor-menu" class="grid-menu"></div>
+        </main>
+    </div>
+
+    <!-- Pantalla Inmersiva de Realidad Aumentada (Oculta por defecto) -->
+    <div id="pantalla-ar" class="oculto">
+        <button id="btn-regresar" class="btn-flotante">⬅️ Regresar al Menú</button>
+        <div id="visor-ar-contenedor">
+            <!-- El model-viewer se inyectará aquí con JavaScript -->
+        </div>
+    </div>
 
     <script type="module" src="js/app.js"></script>
 </body>
