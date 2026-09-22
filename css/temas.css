@@ -1,0 +1,18 @@
+/* css/temas.css */
+:root {
+    /* Tema por defecto (Elegante/Neutro) */
+    --color-fondo: #f9f9f9;
+    --color-texto: #333333;
+    --color-primario: #2c3e50;
+    --color-acento: #e74c3c;
+    --color-tarjeta: #ffffff;
+}
+
+/* Tema de ejemplo (Primavera/Verano) que activaremos con JS después */
+[data-tema="verano"] {
+    --color-fondo: #f0f8ff;
+    --color-texto: #004d40;
+    --color-primario: #00796b;
+    --color-acento: #ff6f00;
+    --color-tarjeta: #ffffff;
+}

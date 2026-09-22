@@ -1,0 +1,53 @@
+/* css/style.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--color-primario);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* Diseño de cuadrícula para que los platillos se acomoden solos */
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Diseño de la tarjeta generada en componentes.js */
+.tarjeta-platillo {
+    background-color: var(--color-tarjeta);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.tarjeta-platillo:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-platillo h3 {
+    margin-top: 10px;
+    color: var(--color-primario);
+}
+
+.precio {
+    display: block;
+    font-size: 1.2em;
+    color: var(--color-acento);
+    margin-top: 10px;
+}
