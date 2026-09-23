@@ -127,3 +127,32 @@ main {
     width: 100%;
     height: 100%;
 }
+
+/* Pantalla de carga (Loader) para Modelos 3D */
+.pantalla-carga {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #111111; /* Fondo oscuro sólido para ocultar el cuadro gris */
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Animación del círculo de carga */
+.spinner {
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top: 5px solid var(--color-acento);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: girar 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -28,16 +28,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function abrirVisorAR(rutaModelo) {
-        pantallaMenu.style.display = 'none'; // Ocultamos el menú
-        pantallaAR.classList.remove('oculto'); // Mostramos la pantalla AR
+        pantallaMenu.style.display = 'none'; 
+        pantallaAR.classList.remove('oculto'); 
         
-        // Inyectamos el visor limpio
+        // Inyectamos el visor junto con su pantalla de carga (poster)
         visorContenedor.innerHTML = `
             <model-viewer 
                 src="${rutaModelo}" 
                 ar ar-modes="webxr scene-viewer quick-look" 
                 camera-controls auto-rotate shadow-intensity="1" 
                 style="width: 100%; height: 100%;">
+                
+                <!-- Pantalla de carga inyectada dentro del visor -->
+                <div slot="poster" class="pantalla-carga">
+                    <div class="spinner"></div>
+                    <p>Preparando tu platillo en 3D...</p>
+                </div>
             </model-viewer>
         `;
     }
