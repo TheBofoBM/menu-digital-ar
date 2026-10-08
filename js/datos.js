@@ -12,6 +12,7 @@ export const platillos = [
         descripcion: "Exquisito corte de 300g acompañado de vegetales asados.",
         precio: "$350.00",
         tieneAR: true,
-        modelo3D: "assets/models/platillo_especial.glb" //ruta del modelo 3D
+        modelo3D: "assets/models/platillo_especial.glb",
+        modeloIOS: "assets/models/platillo_especial.usdz"
     }
 ];
