@@ -1,41 +1,75 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="otono">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Digital AR</title>
-    <link rel="stylesheet" href="css/temas.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f6ef">
+  <meta name="description" content="La carta de Restaurante Marce, en tu idioma. Explora nuestros platillos especiales en 3D y realidad aumentada.">
+  <title>Restaurante Marce · A tu gusto, a tu mesa</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/temas.css"><link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Pantalla principal del Menú -->
-    <div id="pantalla-menu">
-        <header>
-            <h1 data-traducir="titulo">Restaurante Piloto</h1>
-            <button id="btn-traducir" class="btn-icono" title="Cambiar Idioma">🌐</button>
-        </header>
-
-        <!-- Navegación por categorías para evitar scroll infinito -->
-        <nav class="categorias-nav">
-            <button class="btn-categoria activo" data-categoria="todos">Todos</button>
-            <button class="btn-categoria" data-categoria="entradas">Entradas</button>
-            <button class="btn-categoria" data-categoria="fuertes">Platos Fuertes</button>
-        </nav>
-
-        <main>
-            <div id="contenedor-menu" class="grid-menu"></div>
-        </main>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9M8 5.3l8 4.5"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3C10 2 3 7 4 14c1 6 9 7 13 2 3-4 3-8 3-13ZM3 21 15 9"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></symbol>
+  </svg>
+  <a class="skip-link" href="#carta" data-i18n="skip">Ir al menú</a>
+  <div class="season-ribbon"><svg class="icon"><use href="#i-leaf"/></svg><span data-i18n="ribbon">La temporada se sirve a la mesa</span><span class="ribbon-dot">·</span><span data-season-name>Otoño</span></div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Restaurante Marce"><span class="brand-mark">m<span>•</span></span><span class="brand-type">marce<small data-i18n="restaurant">RESTAURANTE</small></span></a>
+    <nav class="main-nav" aria-label="Navegación principal" data-i18n-aria="navigation"><a href="#carta" data-i18n="navMenu">Nuestra carta</a><a href="#experiencia" data-i18n="navExperience">La experiencia</a></nav>
+    <div class="header-controls">
+      <label class="theme-control"><svg class="icon"><use href="#i-leaf"/></svg><span class="sr-only" data-i18n="chooseTheme">Elegir temporada</span><select id="tema" aria-label="Elegir temporada" data-i18n-aria="chooseTheme"></select></label>
+      <label class="language-control"><svg class="icon"><use href="#i-globe"/></svg><span class="sr-only" data-i18n="chooseLanguage">Elegir idioma</span><select id="idioma" aria-label="Elegir idioma" data-i18n-aria="chooseLanguage"><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option></select></label>
     </div>
-
-    <!-- Pantalla Inmersiva de Realidad Aumentada (Oculta por defecto) -->
-    <div id="pantalla-ar" class="oculto">
-        <button id="btn-regresar" class="btn-flotante">⬅️ Regresar al Menú</button>
-        <div id="visor-ar-contenedor">
-            <!-- El model-viewer se inyectará aquí con JavaScript -->
-        </div>
-    </div>
-
-    <script type="module" src="js/app.js"></script>
+  </header>
+  <main>
+    <section class="hero page-width" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="small-line"></span><span data-i18n="heroEyebrow">BUENA COCINA. BUENOS MOMENTOS.</span></p>
+        <h1 id="hero-title"><span data-i18n="heroTitle1">A tu gusto.</span><br><em data-i18n="heroTitle2">A tu mesa.</em></h1>
+        <p class="hero-description" data-i18n="heroDescription">Hay sabores que se disfrutan desde el primer vistazo. Descubre nuestra carta y encuentra tu próximo favorito.</p>
+        <div class="hero-actions"><a class="button primary" href="#carta"><span data-i18n="seeMenu">Descubrir la carta</span><svg class="icon"><use href="#i-arrow"/></svg></a><button class="button text-button" data-open-special><svg class="icon"><use href="#i-cube"/></svg><span data-i18n="explore3d">Explorar en 3D</span></button></div>
+        <div class="hero-note"><span class="note-icon"><svg class="icon"><use href="#i-phone"/></svg></span><p><strong data-i18n="heroNoteTitle">Un vistazo antes del primer bocado</strong><span data-i18n="heroNote">Mira nuestro especial sobre tu mesa con realidad aumentada.</span></p></div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/img/marce-carta-portada.jpg" alt="Mesa y platillos de Marce en su carta" data-i18n-alt="heroImage" width="700" height="875" fetchpriority="high">
+        <span class="image-label"><svg class="icon"><use href="#i-spark"/></svg><span data-i18n="houseSpecial">EL ESPECIAL DE LA CASA</span></span>
+        <div class="hero-image-caption"><span data-i18n="heroCaption">Algo especial te espera.</span><small data-i18n="samplePhoto">Fotografía de muestra</small></div>
+        <button class="ar-photo-button" data-open-special aria-label="Explorar el especial en 3D" data-i18n-aria="openSpecial"><svg class="icon"><use href="#i-cube"/></svg><span>3D / AR</span><svg class="icon"><use href="#i-arrow"/></svg></button>
+        <div class="season-stamp"><svg class="icon"><use href="#i-leaf"/></svg><span data-i18n="seasonEdition">EDICIÓN DE</span><strong data-season-name>Otoño</strong></div>
+      </div>
+    </section>
+    <div class="promise-strip page-width"><span><svg class="icon"><use href="#i-leaf"/></svg><span data-i18n="promise1">Cocina que se disfruta</span></span><span><svg class="icon"><use href="#i-globe"/></svg><span data-i18n="promise2">La carta en tu idioma</span></span><span><svg class="icon"><use href="#i-cube"/></svg><span data-i18n="promise3">Una nueva forma de elegir</span></span></div>
+    <section id="carta" class="menu-section page-width" aria-labelledby="menu-title">
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="menuEyebrow">HECHO PARA DISFRUTARSE</p><h2 id="menu-title" data-i18n="menuTitle">La carta de Marce</h2><p data-i18n="menuDescription">Encuentra ese platillo que se te antoja hoy.</p></div><span class="currency-note" data-i18n="currency">PRECIOS EN MXN</span></div>
+      <div id="demo-note" class="demo-note"><span class="demo-dot"></span><span data-i18n="demoMenu">Carta de demostración · platillos, fotos y precios de muestra.</span></div>
+      <div class="menu-tools"><nav id="categorias" class="category-nav" aria-label="Categorías del menú" data-i18n-aria="categories"></nav><label class="search-box"><svg class="icon"><use href="#i-search"/></svg><input id="buscar" type="search" placeholder="¿Qué se te antoja?" aria-label="Buscar un platillo" data-i18n-placeholder="searchPlaceholder" data-i18n-aria="searchLabel" autocomplete="off"></label></div>
+      <div class="menu-meta"><p id="resultados" role="status" aria-live="polite"></p><label class="vegetarian-filter"><input type="checkbox" id="vegetariano"><svg class="icon"><use href="#i-leaf"/></svg><span data-i18n="vegetarianOnly">Opciones vegetarianas</span></label></div>
+      <div id="contenedor-menu" class="menu-grid"></div>
+      <div class="load-more"><button id="mostrar-mas" class="button primary" data-i18n="showMore" hidden>Mostrar más opciones</button></div>
+      <div id="sin-resultados" class="empty-state" hidden><svg class="icon"><use href="#i-search"/></svg><h3 data-i18n="emptyTitle">Todavía no encontramos ese antojo</h3><p data-i18n="emptyDescription">Prueba otra búsqueda o vuelve a ver toda la carta.</p><button id="limpiar-filtros" class="button primary" data-i18n="resetFilters">Ver toda la carta</button></div>
+      <p class="allergy-note" data-i18n="allergyNote">¿Tienes alguna alergia? Consulta con nuestro equipo antes de elegir. Los ingredientes mostrados son de demostración.</p>
+    </section>
+    <section id="experiencia" class="experience-section page-width" aria-labelledby="experience-title">
+      <div class="experience-visual"><img src="assets/img/marce-surtido.jpg" alt="Surtido de la Casa en la carta de Marce" data-i18n-alt="restaurantImage" width="818" height="277" loading="lazy"><span data-i18n="experienceImageLabel">SURTIDO DE LA CASA</span></div>
+      <div class="experience-copy"><p class="eyebrow"><svg class="icon"><use href="#i-cube"/></svg><span data-i18n="experienceEyebrow">TU MESA, UNA NUEVA EXPERIENCIA</span></p><h2 id="experience-title" data-i18n="experienceTitle">Conócelo antes de probarlo.</h2><p data-i18n="experienceDescription">Nuestros especiales cobran vida en tu pantalla. Gira el platillo, acércate a los detalles y, desde un celular compatible, colócalo sobre tu mesa.</p><ol class="experience-steps"><li><span>01</span><div><strong data-i18n="step1Title">Elige el especial</strong><p data-i18n="step1Description">Busca el símbolo 3D / AR en la carta.</p></div></li><li><span>02</span><div><strong data-i18n="step2Title">Explora el emplatado</strong><p data-i18n="step2Description">Gira y acerca el modelo con tus dedos.</p></div></li><li><span>03</span><div><strong data-i18n="step3Title">Llévalo a tu mesa</strong><p data-i18n="step3Description">Activa la AR y apunta a una superficie horizontal.</p></div></li></ol><button class="button primary" data-open-special><svg class="icon"><use href="#i-cube"/></svg><span data-i18n="tryExperience">Probar la experiencia</span></button></div>
+    </section>
+    <section class="season-section page-width"><svg class="season-decoration icon"><use href="#i-leaf"/></svg><div><p class="eyebrow" data-i18n="seasonEyebrow">LOS MOMENTOS CAMBIAN. EL GUSTO QUEDA.</p><h2 data-i18n="seasonTitle">Cada temporada tiene su encanto.</h2><p data-i18n="seasonDescription">Una carta con el ambiente de cada estación. Elige tu temporada favorita en la parte superior.</p></div><div class="current-season"><span data-i18n="currentSeason">HOY EN MARCE</span><strong data-season-name>Otoño</strong><span class="season-colors" aria-hidden="true"><i></i><i></i><i></i></span></div></section>
+  </main>
+  <footer class="site-footer page-width"><a class="brand footer-brand" href="#"><span class="brand-mark">m<span>•</span></span><span class="brand-type">marce<small data-i18n="restaurant">RESTAURANTE</small></span></a><p data-i18n="footer">Buena cocina. A tu ritmo.</p><span data-i18n="prototype">Prototipo · Restaurante Marce</span></footer>
+  <dialog id="detalle-dialog" class="detail-dialog" aria-labelledby="detalle-titulo"><button class="close-button" data-close-dialog aria-label="Cerrar" data-i18n-aria="close"><svg class="icon"><use href="#i-close"/></svg></button><div id="detalle-contenido"></div></dialog>
+  <dialog id="ar-dialog" class="ar-dialog" aria-labelledby="ar-titulo">
+    <header class="ar-header"><div><span class="eyebrow" data-i18n="viewerEyebrow">LA EXPERIENCIA MARCE</span><h2 id="ar-titulo"></h2></div><button class="close-button" data-close-dialog aria-label="Cerrar visor" data-i18n-aria="closeViewer"><svg class="icon"><use href="#i-close"/></svg></button></header>
+    <div class="ar-body"><div class="viewer-stage"><div id="visor-ar-contenedor"></div><div id="model-state" class="model-state" role="status"><span class="spinner"></span><p id="model-message"></p><button id="reintentar-modelo" class="button primary" hidden data-i18n="retry">Reintentar</button></div><span class="viewer-gesture"><svg class="icon"><use href="#i-cube"/></svg><span data-i18n="viewerGesture">Arrastra para girar · Acerca para ver los detalles</span></span></div><aside class="ar-information"><span class="tag" data-i18n="special">ESPECIAL DE LA CASA</span><h3 data-i18n="arTitle">Del menú a tu mesa.</h3><p data-i18n="arDescription">Explora el modelo en 3D. Para verlo en tu espacio, abre esta página desde un celular compatible.</p><button id="activar-ar" class="button primary" disabled><svg class="icon"><use href="#i-cube"/></svg><span data-i18n="viewOnTable">Ver en mi mesa</span></button><p id="ar-status" class="ar-status" role="status" aria-live="polite"></p><div id="model-demo-note" class="model-demo-note"><svg class="icon"><use href="#i-spark"/></svg><div><strong data-i18n="testModel">Modelo de prueba</strong><p data-i18n="testModelDescription">El emplatado y la escala son aproximados; pueden variar respecto al platillo servido.</p></div></div><p class="privacy-note" data-i18n="cameraNote">La cámara se solicita al activar la AR. Este sitio no guarda imágenes.</p></aside></div>
+  </dialog>
+  <noscript><p class="noscript-note">Activa JavaScript para ver la carta interactiva de Restaurante Marce.</p></noscript>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>

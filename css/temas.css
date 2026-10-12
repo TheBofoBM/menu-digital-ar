@@ -1,40 +1,6 @@
-:root {
-    /* Tema por defecto */
-    --color-fondo: #f9f9f9;
-    --color-texto: #333333;
-    --color-primario: #2c3e50;
-    --color-acento: #e74c3c;
-    --color-tarjeta: #ffffff;
-}
-
-[data-tema="dia-muertos"] {
-    --color-fondo: #2b1130;
-    --color-texto: #fce4ec;
-    --color-primario: #d81b60;
-    --color-acento: #ff9800; /* Cempasúchil */
-    --color-tarjeta: #4a148c;
-}
-
-[data-tema="halloween"] {
-    --color-fondo: #121212;
-    --color-texto: #e0e0e0;
-    --color-primario: #ff6d00;
-    --color-acento: #76ff03; /* Verde moco/monstruo */
-    --color-tarjeta: #212121;
-}
-
-[data-tema="navidad"] {
-    --color-fondo: #f4f6f6;
-    --color-texto: #111111;
-    --color-primario: #b71c1c; /* Rojo Santa */
-    --color-acento: #1b5e20; /* Verde Pino */
-    --color-tarjeta: #ffffff;
-}
-
-[data-tema="independencia"], [data-tema="bandera"] {
-    --color-fondo: #ffffff;
-    --color-texto: #333333;
-    --color-primario: #115c32; /* Verde bandera */
-    --color-acento: #ce1126; /* Rojo bandera */
-    --color-tarjeta: #f5f5f5;
-}
+:root{--bg:#f8f6ef;--surface:#fffefb;--ink:#292f24;--muted:#6b6e62;--primary:#4d5b39;--primary-hover:#39442b;--accent:#a46639;--line:#e2e3d8;--soft:#eeeede;--season-bg:#e8eadc;--season-ink:#434d35}
+[data-tema="primavera"]{--primary:#47624a;--primary-hover:#324a35;--accent:#926768;--soft:#e9efdf;--season-bg:#e6eeda;--season-ink:#38533c}
+[data-tema="verano"]{--bg:#fbf8f0;--primary:#286463;--primary-hover:#1c4b4a;--accent:#ad5933;--soft:#e3efea;--season-bg:#dbece4;--season-ink:#235b52}
+[data-tema="invierno"]{--bg:#f4f6f6;--primary:#425568;--primary-hover:#2e3e4e;--accent:#886044;--soft:#e5eaee;--season-bg:#e0e7ed;--season-ink:#3b5063}
+[data-tema="dia-muertos"]{--bg:#faf4ed;--primary:#653a68;--primary-hover:#4d2850;--accent:#aa5918;--soft:#f1e7f0;--season-bg:#eedfeb;--season-ink:#64365f}
+[data-tema="navidad"]{--bg:#f9f6f0;--primary:#315747;--primary-hover:#214034;--accent:#a1473d;--soft:#e7ebe3;--season-bg:#e1e9df;--season-ink:#315747}
