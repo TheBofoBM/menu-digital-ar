@@ -1,4 +1,4 @@
-import { platillos, restaurante, categoriasMenu, modeloDemostracion } from './datos.js';
+import { platillos, restaurante, categoriasMenu } from './datos.js';
 import { crearTarjetaPlatillo, crearDetalle } from './componentes.js';
 import { traducir } from './traducciones.js';
 import { filtrarPlatillos, idiomas, temas, temaAutomatico } from './logica.js';
@@ -85,7 +85,8 @@ function actualizarTextosModelo() {
   const modeloTexto = platilloAR.modeloTextos?.[estado.idioma] || platilloAR.modeloTextos?.es;
   $('#ar-titulo').textContent = modeloTexto?.nombre || (platilloAR.textos[estado.idioma] || platilloAR.textos.es).nombre;
   $('#model-demo-note p').textContent = modeloTexto?.nota || t('testModelDescription');
-  $('.ar-information > .tag').textContent = t(platilloAR.modeloPrueba ? 'testModel' : 'special');
+  $('#model-demo-note strong').textContent = t(platilloAR.modeloPrueba ? 'testModel' : 'referenceModel');
+  $('.ar-information > .tag').textContent = t(platilloAR.modeloPrueba ? 'testModel' : platilloAR.especial ? 'special' : platilloAR.categoria);
 }
 function comprobarAR() {
   const disponible = Boolean(visor?.loaded && visor.canActivateAR && window.isSecureContext);
@@ -110,7 +111,7 @@ async function mostrarAR(platillo) {
   const revision = ++revisionAR;
   clearTimeout(temporizadorModelo);
   actualizarTextosModelo();
-  $('#model-demo-note').hidden = !platillo.modeloPrueba;
+  $('#model-demo-note').hidden = !platillo.modeloPrueba && !platillo.modeloReferencial;
   $('#model-state').hidden = false;
   $('#model-state .spinner').hidden = false;
   $('#reintentar-modelo').hidden = true;
@@ -134,9 +135,12 @@ async function mostrarAR(platillo) {
     modelo.setAttribute('camera-controls', '');
     modelo.setAttribute('touch-action', 'pan-y');
     modelo.setAttribute('disable-pan', '');
+    modelo.setAttribute('interaction-prompt', 'none');
     modelo.setAttribute('shadow-intensity', '1');
     modelo.setAttribute('exposure', '1');
-    modelo.setAttribute('camera-orbit', '25deg 65deg auto');
+    modelo.setAttribute('camera-orbit', '0deg 45deg auto');
+    modelo.setAttribute('min-camera-orbit', 'auto 0deg auto');
+    modelo.setAttribute('max-camera-orbit', 'auto 85deg auto');
     modelo.setAttribute('alt', t('modelAlt', { name: $('#ar-titulo').textContent }));
     // Sin ios-src, model-viewer genera USDZ para Quick Look de iOS.
     if (platillo.modeloIOS) modelo.setAttribute('ios-src', platillo.modeloIOS);
@@ -191,7 +195,7 @@ document.addEventListener('click', e => {
   if (cerrar) { cerrar.closest('dialog').close(); return; }
   const botonAR = e.target.closest('[data-ar-id], [data-open-special]');
   if (botonAR) {
-    const p = botonAR.dataset.arId ? platillos.find(p => p.id === botonAR.dataset.arId) : platillos.find(p => p.especial && p.modelo3D) || modeloDemostracion;
+    const p = botonAR.dataset.arId ? platillos.find(p => p.id === botonAR.dataset.arId) : platillos.find(p => p.especial && p.modelo3D);
     mostrarAR(p); return;
   }
   const botonDetalle = e.target.closest('[data-detail-id]');
@@ -216,6 +220,6 @@ $('#activar-ar').addEventListener('click', async () => {
   try { await visor.activateAR(); } catch { estadoAR = 'arFailed'; actualizarMensajesAR(); }
 });
 window.addEventListener('pageshow', () => { if (visor?.loaded) comprobarAR(); });
-document.querySelectorAll('[data-open-special]').forEach(el => { el.hidden = !platillos.some(p => p.especial && p.modelo3D) && !modeloDemostracion?.modelo3D; });
+document.querySelectorAll('[data-open-special]').forEach(el => { el.hidden = !platillos.some(p => p.especial && p.modelo3D); });
 aplicarTextos();
 renderizarMenu();

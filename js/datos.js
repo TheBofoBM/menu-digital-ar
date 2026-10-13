@@ -1,3 +1,4 @@
+import { modelosAR, notasModelos } from './modelos.js';
 // Catálogo transcrito de la carta aportada por el usuario (6 páginas).
 // Los alérgenos y opciones vegetarianas no se deducen: requieren confirmación de Marce.
 export const restaurante = {
@@ -10,37 +11,6 @@ export const restaurante = {
 };
 
 export const categoriasMenu = ["sopas","carnes","surtido","extras","antojitos","peques","saludable","desayunos","postres","bebidas","cervezas","licores","preparados"];
-
-export const modeloDemostracion = {
-  "id": "demo-canasta",
-  "modeloPrueba": true,
-  "modelo3D": "assets/models/platillo_especial.optimizado.glb",
-  "textos": {
-    "es": {
-      "nombre": "Canasta de temporada"
-    },
-    "en": {
-      "nombre": "Seasonal basket"
-    },
-    "fr": {
-      "nombre": "Panier de saison"
-    }
-  },
-  "modeloTextos": {
-    "es": {
-      "nombre": "Canasta de temporada",
-      "nota": "Este archivo muestra una canasta decorativa para probar la AR. Los modelos de los platillos de la carta están pendientes; la escala es aproximada."
-    },
-    "en": {
-      "nombre": "Seasonal basket",
-      "nota": "This decorative basket is for testing AR. Models of the menu dishes are pending; scale is approximate."
-    },
-    "fr": {
-      "nombre": "Panier de saison",
-      "nota": "Ce panier décoratif permet de tester la RA. Les modèles des plats de la carte restent à ajouter ; l’échelle est approximative."
-    }
-  }
-};
 
 export const platillos = [
   {
@@ -2309,3 +2279,15 @@ export const platillos = [
     }
   }
 ];
+
+for (const modelo of modelosAR.filter(m => m.platilloId)) {
+  const platillo = platillos.find(p => p.id === modelo.platilloId);
+  if (!platillo) throw new Error('Platillo no encontrado para modelo ' + modelo.id);
+  platillo.modelo3D = modelo.archivo;
+  platillo.modeloReferencial = true;
+  platillo.escalaConfirmada = modelo.escalaConfirmada;
+  platillo.modeloTextos = Object.fromEntries(['es', 'en', 'fr'].map(idioma => [idioma, {
+    nombre: platillo.textos[idioma].nombre,
+    nota: notasModelos[idioma],
+  }]));
+}

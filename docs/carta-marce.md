@@ -171,4 +171,4 @@ La carta señala que los precios incluyen IVA y que los desayunos se sirven ante
 
 ## AR
 
-La especialidad identificada en la carta es «Orden de chiles chipotle rellenos», 2 piezas con arroz y frijoles ($88). El PDF no contiene modelos 3D. La canasta del repositorio se conserva únicamente en la experiencia de demostración y no se presenta como emplatado de estos platillos.
+La especialidad identificada en la carta es «Orden de chiles chipotle rellenos», 2 piezas con arroz y frijoles ($88). Los modelos aportados después en Negocios.zip se incorporaron a los chipotles rellenos, el Surtido de la Casa y la Sopa Azteca. Las medidas aproximadas indicadas por Marce son 32,5 cm (punto medio del rango de 30–35 cm), 40 cm y 20 cm respectivamente. La carne especial se excluyó por indicación del usuario. Consulta el proceso y sus límites en [modelos-ar.md](modelos-ar.md).

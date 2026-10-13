@@ -24,12 +24,13 @@ export function crearTarjetaPlatillo(platillo, idioma, t) {
     '<img src="' + escapar(platillo.imagen) + '" alt="' + escapar(texto.nombre) + '" loading="lazy" width="818" height="277">' +
     (platillo.imagenDeCarta ? '<span class="photo-label">' + escapar(t('menuPhoto')) + '</span>' : '') + '</button>' : '';
   const notaModelo = platillo.modeloPrueba ? '<span class="model-availability">' + escapar(t('testModel') + ': ' + (platillo.modeloTextos?.[idioma] || platillo.modeloTextos?.es)?.nombre) + '</span>' : '';
+  const acciones = platillo.modelo3D ? '<div class="dish-actions"><button class="details-button" data-detail-id="' + id + '">' + escapar(t('details')) + '</button>' + accion + '</div>' : accion;
   return '<article class="dish-card' + (destacado ? ' featured' : '') + (!platillo.imagen ? ' text-only' : '') + '" data-dish-id="' + id + '">' + imagen +
     '<div class="dish-content">' + etiqueta + '<h3>' + escapar(texto.nombre) + '</h3>' +
     (texto.descripcion ? '<p class="dish-description">' + escapar(texto.descripcion) + '</p>' : '') + vegetariano + notaModelo +
     (platillo.disponibilidad === 'desayuno' ? '<span class="dish-notice">' + escapar(t('breakfastHours')) + '</span>' : '') +
     (platillo.suplemento ? '<span class="dish-notice">' + escapar(t('supplement')) + '</span>' : '') +
-    '<div class="dish-bottom"><span class="dish-price">' + escapar(precioVisible(platillo, idioma, t)) + '</span>' + accion + '</div></div></article>';
+    '<div class="dish-bottom"><span class="dish-price">' + escapar(precioVisible(platillo, idioma, t)) + '</span>' + acciones + '</div></div></article>';
 }
 export function crearDetalle(platillo, idioma, t) {
   const texto = platillo.textos[idioma] || platillo.textos.es;

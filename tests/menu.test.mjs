@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
-import { platillos, categoriasMenu, modeloDemostracion } from '../js/datos.js';
+import { platillos, categoriasMenu } from '../js/datos.js';
 import { filtrarPlatillos, idiomas, normalizar, temaAutomatico, formatoPrecio } from '../js/logica.js';
 import { traducciones, traducir } from '../js/traducciones.js';
 import { crearTarjetaPlatillo, crearDetalle } from '../js/componentes.js';
@@ -64,19 +64,23 @@ test('todos los textos, categorías y nombres tienen traducción', async () => {
   assert.ok(formatoPrecio(88, 'en').includes('88'));
 });
 
-test('recursos existentes y modelo de prueba separado de los platillos reales', async () => {
+test('recursos existentes y modelos asociados a los platillos correctos', async () => {
+  assert.deepEqual(platillos.filter(p => p.modelo3D).map(p => p.id).sort(), ['chipotles-rellenos', 'sopa-azteca', 'surtido-casa']);
   for (const p of platillos) {
     assert.ok(categoriasMenu.includes(p.categoria));
     assert.ok(Number.isFinite(p.precio) && p.precio >= 0);
     assert.equal(p.alergenos, null);
-    assert.ok(!p.modelo3D);
+    if (p.modelo3D) {
+      assert.ok((await stat(new URL('../' + p.modelo3D, import.meta.url))).size > 0);
+      assert.ok(p.modeloReferencial);
+      assert.ok(!p.modeloPrueba);
+      for (const idioma of idiomas) assert.ok(p.modeloTextos[idioma].nota);
+      const html = crearTarjetaPlatillo(p, 'es', clave => traducir('es', clave));
+      assert.ok(html.includes('data-ar-id="' + p.id + '"'));
+      assert.ok(html.includes('data-detail-id="' + p.id + '"'));
+    }
     if (p.imagen) assert.ok((await stat(new URL('../' + p.imagen, import.meta.url))).size > 0);
   }
-  assert.ok(modeloDemostracion.modeloPrueba);
-  const optimizado = await stat(new URL('../' + modeloDemostracion.modelo3D, import.meta.url));
-  const original = await stat(new URL('../assets/models/platillo_especial.glb', import.meta.url));
-  assert.ok(optimizado.size < 25 * 1024 * 1024);
-  assert.ok(optimizado.size < original.size / 2);
 });
 
 test('la carta no precarga modelos ni muestra imágenes inexistentes', () => {
